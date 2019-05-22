@@ -8,28 +8,40 @@ namespace Tp7
 {
     class Program
     {
-        public struct Datos
+        public struct DatosEmpleado
         {
-            public string Nombre;
-            public string Apellido;
-            public int DiaNac;
-            public int MesNac;
-            public int AñoNac;
-            public bool EstadoCivil;
-            public bool Género;
-            public int DiaIngreso;
-            public int MesIngreso;
-            public int AñoIngreso;
-            public double SueldoBasico;
-            public string Cargo;
+            public string nombre;
+            public string apellido;
+            public int diaNac;
+            public int mesNac;
+            public int añoNac;
+            public string estadoCivil;
+            public string género;
+            public int diaIngreso;
+            public int mesIngreso;
+            public int añoIngreso;
+            public double sueldoBasico;
+            public string cargo;
+
+            public void CargarDatos()
+            {
+
+
+
+            }
         }
-        public class Trabajo
+        public class Datos
         {
             enum Cargos {Auxiliar, Administrativo, Ingeniero, Especialista, Investigador}
+            enum NombresMasc {Juan, Jorge, Pedro, Vladimir}
+            enum NombresFem {Ana, Micaela, María, Zina}
+            enum EstadoCivil {Solterx, Casadx, Viudx, Complicado}
+            enum Género {Masculino, Femenino}
+            enum Apellidos {Pérez, Gomez, Rodriguez, Hitler}
         }
         static void Main(string[] args)
         {
-            List<Datos> ListaDeEmpleados = new List<Datos>();
+            List<DatosEmpleado> ListaDeEmpleados = new List<DatosEmpleado>();
         }
     }
 }
