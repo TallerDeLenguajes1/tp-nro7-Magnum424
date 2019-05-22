@@ -25,7 +25,8 @@ namespace Tp7
 
             public void CargarDatos()
             {
-
+                Random rdn = new Random();
+                
 
 
             }
