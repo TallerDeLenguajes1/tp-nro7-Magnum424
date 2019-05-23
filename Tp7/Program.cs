@@ -36,6 +36,7 @@ namespace Tp7
                 this.sueldoBasico = sueldoBasico;
                 this.cargo = cargo;
             }
+
         }
         static void Main(string[] args)
         {
@@ -66,6 +67,9 @@ namespace Tp7
             //Fecha de ingreso
             DateTime FechaIng = new DateTime(año, mes, dia);
 
+            ////
+            DatosEmpleado NuevoEmpleado = new DatosEmpleado();
+            ListaDeEmpleados.Add(NuevoEmpleado);
 
 
         }
