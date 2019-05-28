@@ -63,18 +63,63 @@ namespace Tp7
                 Console.WriteLine(this.cargo);
             }
             ////Calculo la edad
-            public void CalculoEdad()
+            public int CalculoEdad()
             {
+                DateTime inicio = new DateTime(1, 1, 1);
                 DateTime hoy = DateTime.Today;
                 TimeSpan edad = (hoy - this.fechaNac);
-                Console.WriteLine("La edad es: {0}", edad.ToString());
+                int años = (inicio + edad).Year;
+                return años;
             }
             ////Calculo la antiguedad
-            public void CalculoAntiguedad()
+            public int CalculoAntiguedad()
             {
+                DateTime inicio = new DateTime(1, 1, 1);
                 DateTime hoy = DateTime.Today;
                 TimeSpan antiguedad = (hoy - this.fechaIng);
-                Console.WriteLine("La antiguedad del empleado en la empresa es: {0}", antiguedad.ToString());
+                int años = (inicio + antiguedad).Year;
+                return años;
+            }
+            ////Años para jubilarse
+            public void Jubilacion()
+            {
+                int jub;
+                int edad = CalculoEdad();
+                if (this.género == Género.Masculino)
+                {
+                    jub = 65 - edad;
+                    Console.WriteLine("Los años que le quedan para jubilarse son: {0}", jub);
+                }
+                else
+                {
+                    jub = 60 - edad;
+                    Console.WriteLine("Los años que le quedan para jubilarse son: {0}", jub);
+                }
+            }
+            public double CalculoSalario()
+            {
+                double sal = this.sueldoBasico;
+                double adi;
+                Random rnd = new Random();
+                int hijos = rnd.Next(0, 10);
+                if (this.CalculoAntiguedad() < 20)
+                {
+                    adi = sal + (this.sueldoBasico * 0.02) * this.CalculoAntiguedad();
+                }
+                else
+                {
+                    adi = sal + (this.sueldoBasico * 0.25);
+                }
+                if (this.cargo == Cargos.Ingeniero || this.cargo == Cargos.Especialista)
+                {
+                    adi = adi + (adi * 0.50);
+                }
+                if (this.estadoCivil == EstadoCivil.Casadx && hijos > 2)
+                {
+                    adi = adi + 5000;
+                }
+                sal = sal + adi;
+                return sal;
             }
         }
         static void Main(string[] args)
@@ -87,6 +132,8 @@ namespace Tp7
             EstadoCivil Est;
             Género Gen;
             Cargos Car;
+            int cont = 0;
+            double total = 0;
 
             ////Arrays con datos requeridos
             string[] Apellidos = new string[] { "Pérez", "Gomez", "Abduzcan" };
@@ -100,7 +147,7 @@ namespace Tp7
             List<DatosEmpleado> ListaDeEmpleados = new List<DatosEmpleado>();
 
             ////Datos para la carga
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 20; i++)
             {
                 ////Tomo 3 numeros aleatorios para la fecha de nacimiento
                 dia = rdn.Next(1, 31);
@@ -141,12 +188,23 @@ namespace Tp7
             {
                 empleado.MostrarEmpleados2();
                 Console.Write("\n");
-                empleado.CalculoEdad();
+                Console.WriteLine("La edad es: {0}", empleado.CalculoEdad());
                 Console.Write("\n");
-                empleado.CalculoAntiguedad();
+                Console.WriteLine("La antiguedad es: {0}", empleado.CalculoAntiguedad());
                 Console.Write("\n");
+                empleado.Jubilacion();
+                Console.Write("\n");
+                Console.WriteLine("El salario del empleado es: ${0}", empleado.CalculoSalario());
+                Console.Write("\n");
+                total = total + empleado.CalculoSalario();
                 Console.ReadKey();
+                cont = cont+1;
             }
+            Console.Write("\n");
+            Console.WriteLine("La empresa tiene {0} empleados.", cont);
+            Console.Write("\n");
+            Console.WriteLine("La empresa gasta ${0} en salarios.", total);
+            Console.ReadKey();
         }
     }
 }
